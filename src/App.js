@@ -1,15 +1,72 @@
-import React from "react";
+import { render } from "@testing-library/react";
+import React, { useState } from "react";
 import "./budgeter.css";
 
-function BodySection(props) {
-  return (
-    <section class="container move-up">
-      <p>
-        <h2>{props.title}</h2>${props.currMoney}
-      </p>
-      <Category currMoney={props.currMoney} />
-    </section>
-  );
+class BodySection extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      dummyArray: [100],
+      index: 0,
+    };
+    this.addCategory = this.addCategory.bind(this);
+    this.removeCategory = this.removeCategory.bind(this);
+  }
+
+  addCategory() {
+    const dummyArray = this.state.dummyArray;
+    const sum = dummyArray.reduce((previous, current) => previous + current);
+    const avg = sum / (dummyArray.length + 1);
+    const newArray = [];
+    for (let i = 0; i < dummyArray.length + 1; i++) {
+      newArray.push(avg);
+    }
+    this.setState({
+      dummyArray: [...newArray],
+      index: this.state.index + 1,
+    });
+  }
+
+  removeCategory() {
+    const dummyArray = this.state.dummyArray;
+    if (dummyArray.length > 1) {
+      dummyArray.pop();
+      const newArray = [];
+      const avg = 100 / dummyArray.length;
+      for (let i = 0; i < dummyArray.length; i++) {
+        newArray.push(avg);
+      }
+
+      this.setState({
+        dummyArray: [...newArray],
+      });
+    }
+  }
+
+  render() {
+    const categoriesArray = this.state.dummyArray.map((percent) => (
+      <Category
+        currMoney={this.props.currMoney}
+        percent={percent}
+        removeCategory={this.removeCategory}
+        categories={this.state.categories}
+        index={this.state.index}
+      />
+    ));
+    return (
+      <section class="container move-up">
+        <p>
+          <h2>{this.props.title}</h2>${this.props.currMoney}
+        </p>
+        {/* {this.state.categories} */}
+        {categoriesArray}
+        <div style={{ position: "relative", left: 110, bottom: 5 }}>
+          <button onClick={this.addCategory}>+</button>
+          <button onClick={this.removeCategory}>x</button>
+        </div>
+      </section>
+    );
+  }
 }
 
 function Header(props) {
@@ -44,9 +101,11 @@ function Category(props) {
   return (
     <div class="category-bubble">
       <input class="category-name" placeholder="Essentials" />
-      <p class="category-amount">${props.currMoney}</p>
+      <p class="category-amount">
+        ${(props.currMoney * props.percent * 0.01).toFixed(2)}
+      </p>
       <div class="vl" />
-      <GetPercent class="category-percent" percent={100} />
+      <GetPercent class="category-percent" percent={props.percent} />
     </div>
   );
 }
