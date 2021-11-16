@@ -6,51 +6,62 @@ class BodySection extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      dummyArray: [100],
+      percents: [100],
       index: 0,
     };
     this.addCategory = this.addCategory.bind(this);
     this.removeCategory = this.removeCategory.bind(this);
+    this.updatePercent = this.updatePercent.bind(this);
   }
 
   addCategory() {
-    const dummyArray = this.state.dummyArray;
-    const sum = dummyArray.reduce((previous, current) => previous + current);
-    const avg = sum / (dummyArray.length + 1);
-    const newArray = [];
-    for (let i = 0; i < dummyArray.length + 1; i++) {
+    const percents = this.state.percents;
+    const lastPercent = percents[percents.length - 1];
+    const avg = lastPercent / 2;
+    let newArray = percents;
+    newArray.pop();
+    //when adding a new category, divides last percent into two smaller percents
+    for (let i = 0; i < 2; i++) {
       newArray.push(avg);
     }
+
     this.setState({
-      dummyArray: [...newArray],
+      percents: [...newArray],
       index: this.state.index + 1,
     });
   }
 
   removeCategory() {
-    const dummyArray = this.state.dummyArray;
-    if (dummyArray.length > 1) {
-      dummyArray.pop();
-      const newArray = [];
-      const avg = 100 / dummyArray.length;
-      for (let i = 0; i < dummyArray.length; i++) {
-        newArray.push(avg);
-      }
+    const percents = this.state.percents;
+    //when removing category, doubles percent of last index
+    if (percents.length > 1) {
+      percents.pop();
+      let newArray = percents;
+      newArray[newArray.length - 1] = newArray[newArray.length - 1] * 2;
 
       this.setState({
-        dummyArray: [...newArray],
+        percents: [...newArray],
+        index: this.state.index - 1,
       });
     }
   }
+  updatePercent(event, index) {
+    let percents = this.state.percents;
+    percents[index] = event.target.value;
+    this.setState({
+      percents: [...percents],
+    });
+  }
 
   render() {
-    const categoriesArray = this.state.dummyArray.map((percent) => (
+    const categoriesArray = this.state.percents.map((percent, index) => (
       <Category
         currMoney={this.props.currMoney}
         percent={percent}
         removeCategory={this.removeCategory}
         categories={this.state.categories}
-        index={this.state.index}
+        index={index}
+        updatePercent={this.updatePercent}
       />
     ));
     return (
@@ -58,7 +69,6 @@ class BodySection extends React.Component {
         <p>
           <h2>{this.props.title}</h2>${this.props.currMoney}
         </p>
-        {/* {this.state.categories} */}
         {categoriesArray}
         <div style={{ position: "relative", left: 110, bottom: 5 }}>
           <button onClick={this.addCategory}>+</button>
@@ -105,7 +115,12 @@ function Category(props) {
         ${(props.currMoney * props.percent * 0.01).toFixed(2)}
       </p>
       <div class="vl" />
-      <GetPercent class="category-percent" percent={props.percent} />
+      <GetCategoryPercent
+        class="category-percent"
+        updatePercent={props.updatePercent}
+        index={props.index}
+        percent={props.percent}
+      />
     </div>
   );
 }
@@ -164,6 +179,24 @@ class GetPercent extends React.Component {
         max={100}
         value={this.props.percent}
         onChange={this.props.changePercent}
+      />
+    );
+  }
+}
+
+class GetCategoryPercent extends React.Component {
+  constructor(props) {
+    super(props);
+  }
+  render() {
+    return (
+      <input
+        type="number"
+        class="input-field percent"
+        min={0}
+        max={100}
+        value={this.props.percent}
+        onChange={(event) => this.props.updatePercent(event, this.props.index)}
       />
     );
   }
