@@ -19,15 +19,16 @@ p {
   align-items: center;
   width: fit-content;
   border-radius: 10px;
-  position: absolute;
+  /* position: absolute;
   top: 50%;
   left: 50%;
   margin-right: -50%;
-  transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%); */
   box-shadow: rgba(50, 50, 93, 0.25) 0px 50px 100px -20px,
     rgba(0, 0, 0, 0.3) 0px 30px 60px -30px,
     rgba(10, 37, 64, 0.35) 0px -2px 6px 0px inset;
 }
+
 .category-bubble {
   outline: 2px solid black;
   display: flex;
@@ -42,6 +43,7 @@ p {
   width: 300px;
   margin-bottom: 15px;
 }
+
 .category-name {
   max-width: 100px;
   height: 38px;
@@ -90,4 +92,13 @@ p {
 .vl {
   border-left: 2px solid black;
   height: 40px;
+}
+
+@media (min-width: 640px) {
+  .category-bubble {
+    width: 1000px;
+  }
+  .category-name {
+    max-width: 400px;
+  }
 }
