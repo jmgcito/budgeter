@@ -1,5 +1,4 @@
-import { render } from "@testing-library/react";
-import React, { useState } from "react";
+import React from "react";
 import "./budgeter.css";
 import Budgeter from "./Budgeter";
 
@@ -34,14 +33,23 @@ class App extends React.Component {
   }
   render() {
     return (
-      <Budgeter
-        currMoney={this.state.currMoney}
-        exPercent={this.state.exPercent}
-        savPercent={this.state.savPercent}
-        changeMoney={this.changeMoney}
-        changeExPercent={this.changeExPercent}
-        changeSavPercent={this.changeSavPercent}
-      />
+      <body>
+        <article class="main">
+          <Budgeter
+            currMoney={this.state.currMoney}
+            exPercent={this.state.exPercent}
+            savPercent={this.state.savPercent}
+            changeMoney={this.changeMoney}
+            changeExPercent={this.changeExPercent}
+            changeSavPercent={this.changeSavPercent}
+          />
+        </article>
+
+        <footer>
+          {" "}
+          <span class="credit">Joshua M Guillen</span>{" "}
+        </footer>
+      </body>
     );
   }
 }

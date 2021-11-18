@@ -43,13 +43,15 @@ class BodySection extends React.Component {
   }
   updatePercent(event, index, previousValue) {
     let percents = this.state.percents;
-    const newPercent = event.target.value;
+    const eventPercent = event.target.value;
     let nextPercent = previousValue;
 
-    if (newPercent > previousValue) {
-      nextPercent = nextPercent - (newPercent - previousValue);
+    if (eventPercent > previousValue) {
+      nextPercent = nextPercent - (eventPercent - previousValue);
+    } else {
+      nextPercent = nextPercent + (eventPercent - previousValue);
     }
-    percents[index] = newPercent;
+    percents[index] = eventPercent;
     percents[index + 1] = nextPercent;
 
     this.setState({
@@ -69,7 +71,7 @@ class BodySection extends React.Component {
       />
     ));
     return (
-      <section class="container move-up">
+      <section class="body-container move-up">
         <p>
           <h2>{this.props.title}</h2>${this.props.currMoney}
         </p>
