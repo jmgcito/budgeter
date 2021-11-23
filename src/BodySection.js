@@ -30,11 +30,13 @@ class BodySection extends React.Component {
 
   removeCategory() {
     const percents = this.state.percents;
-    //when removing category, doubles percent of last index
+    //when removing category, adds last two percents
     if (percents.length > 1) {
+      let lastPercent = percents[percents.length - 1];
       percents.pop();
       let newArray = percents;
-      newArray[newArray.length - 1] = newArray[newArray.length - 1] * 2;
+      newArray[newArray.length - 1] =
+        Number(newArray[newArray.length - 1]) + Number(lastPercent);
 
       this.setState({
         percents: [...newArray],
@@ -44,15 +46,26 @@ class BodySection extends React.Component {
   updatePercent(event, index, previousValue) {
     let percents = this.state.percents;
     const eventPercent = event.target.value;
-    let nextPercent = previousValue;
+    let nextPercent = 0;
 
-    if (eventPercent > previousValue) {
-      nextPercent = nextPercent - (eventPercent - previousValue);
+    if (index + 1 == percents.length) {
+      nextPercent = percents[0];
     } else {
-      nextPercent = nextPercent + (eventPercent - previousValue);
+      nextPercent = percents[index + 1];
     }
-    percents[index] = eventPercent;
-    percents[index + 1] = nextPercent;
+
+    if (eventPercent >= 0 && eventPercent <= 100) {
+      if (nextPercent != 0) {
+        nextPercent = nextPercent - (eventPercent - previousValue);
+        percents[index] = eventPercent;
+
+        if (index + 1 == percents.length) {
+          percents[0] = nextPercent;
+        } else {
+          percents[index + 1] = nextPercent;
+        }
+      }
+    }
 
     this.setState({
       percents: [...percents],
