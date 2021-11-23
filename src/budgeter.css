@@ -117,6 +117,11 @@ footer {
   height: 1000px;
   background-color: rgb(17, 131, 129);
 }
+.add-remove {
+  position: relative;
+  left: 110px;
+  bottom: 5px;
+}
 
 @media (min-width: 640px) {
   .category-bubble {
@@ -142,5 +147,11 @@ footer {
   .vl {
     margin-right: 100px;
     padding-right: 30px;
+  }
+  .add-remove {
+    position: relative;
+    left: 480px;
+    bottom: 5px;
+    transform: scale(125%);
   }
 }

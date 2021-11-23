@@ -89,9 +89,9 @@ class BodySection extends React.Component {
           <h2>{this.props.title}</h2>${this.props.currMoney}
         </p>
         {categoriesArray}
-        <div style={{ position: "relative", left: 110, bottom: 5 }}>
+        <div class="add-remove">
           <button onClick={this.addCategory}>+</button>
-          <button onClick={this.removeCategory}>x</button>
+          <button onClick={this.removeCategory}>-</button>
         </div>
       </section>
     );
