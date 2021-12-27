@@ -5,21 +5,20 @@ import BodySection from "./BodySection";
 
 function Header(props) {
   return (
-    <div class="header-container">
-      <h1 class="margin-right">Monthly Budgeter</h1>
+    <div>
       <p class="margin-right">
-        <strong>Current Amount of Money</strong>
+        <strong>Monthly Income</strong>
         <br />$
         <GetMoney currMoney={props.currMoney} changeMoney={props.changeMoney} />
       </p>
-      <p>
-        <strong>Expenses</strong>{" "}
+      <p class="header-container">
+        <strong>Expenses </strong>
         <GetPercent
           percent={props.exPercent}
           changePercent={props.changeExPercent}
         />
-        % &nbsp;
-        <strong>Savings</strong>{" "}
+        % &nbsp; &nbsp; &nbsp; {/* adds three spaces */}
+        <strong>Savings </strong>
         <GetPercent
           percent={props.savPercent}
           changePercent={props.changeSavPercent}
@@ -42,9 +41,6 @@ function Budgeter(props) {
           changeExPercent={props.changeExPercent}
           changeSavPercent={props.changeSavPercent}
         />{" "}
-      </div>
-
-      <div class="card move-down">
         <BodySection
           currMoney={(props.currMoney * props.exPercent * 0.01).toFixed(2)}
           title={"Expenses"}

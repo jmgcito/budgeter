@@ -34,6 +34,8 @@ class App extends React.Component {
   render() {
     return (
       <body>
+        <h1 class="margin-right title">Monthly Budgeter</h1>
+
         <article class="main">
           <Budgeter
             currMoney={this.state.currMoney}
