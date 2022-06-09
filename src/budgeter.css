@@ -10,12 +10,15 @@ p {
   text-align: center;
 }
 footer {
-  background-color: white;
-  height: 100px;
-  color: rgb(70, 66, 66);
+  position: absolute;
+  bottom: 0;
+  right: 30px;
   text-align: center;
 }
 body {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
   background-color: rgb(36, 43, 43);
 }
 .card {
@@ -25,11 +28,6 @@ body {
   align-items: center;
   width: fit-content;
   border-radius: 10px;
-  /* position: absolute;
-  top: 50%;
-  left: 50%;
-  margin-right: -50%;
-  transform: translate(-50%, -50%); */
   box-shadow: rgba(50, 50, 93, 0.25) 0px 50px 100px -20px,
     rgba(0, 0, 0, 0.3) 0px 30px 60px -30px,
     rgba(10, 37, 64, 0.35) 0px -2px 6px 0px inset;
@@ -40,8 +38,9 @@ body {
 }
 
 .credit {
-  position: relative;
-  top: 50px;
+  font-size: 50px;
+  text-decoration: none;
+  color: antiquewhite;
 }
 .category-bubble {
   outline: 2px solid black;
@@ -119,11 +118,11 @@ body {
   height: 1000px;
   background-color: rgb(36, 43, 43);
 }
-.add-remove {
+/* .add-remove {
   position: relative;
   left: 110px;
   bottom: 5px;
-}
+} */
 
 @media (min-width: 640px) {
   .category-bubble {
@@ -150,10 +149,10 @@ body {
     margin-right: 100px;
     padding-right: 30px;
   }
-  .add-remove {
+  /* .add-remove {
     position: relative;
     left: 480px;
     bottom: 5px;
     transform: scale(125%);
-  }
+  } */
 }

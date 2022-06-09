@@ -33,7 +33,7 @@ class App extends React.Component {
   }
   render() {
     return (
-      <body>
+      <div>
         <h1 class="margin-right title">Monthly Budgeter</h1>
 
         <article class="main">
@@ -46,12 +46,7 @@ class App extends React.Component {
             changeSavPercent={this.changeSavPercent}
           />
         </article>
-
-        <footer>
-          {" "}
-          <span class="credit">Joshua M Guillen</span>{" "}
-        </footer>
-      </body>
+      </div>
     );
   }
 }
