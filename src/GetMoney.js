@@ -1,18 +1,13 @@
 import React from "react";
 
-class GetMoney extends React.Component {
-  constructor(props) {
-    super(props);
-  }
-  render() {
-    return (
-      <input
-        class="input-field"
-        type="number"
-        value={this.props.currMoney}
-        onChange={this.props.changeMoney}
-      />
-    );
-  }
-}
+const GetMoney = (props) => {
+  return (
+    <input
+      className="input-field"
+      type="number"
+      value={props.currMoney}
+      onChange={props.changeMoney}
+    />
+  );
+};
 export default GetMoney;

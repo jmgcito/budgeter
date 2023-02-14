@@ -3,14 +3,14 @@ import GetCategoryPercent from "./GetCategoryPercent";
 
 function Category(props) {
   return (
-    <div class="category-bubble">
-      <input class="category-name" placeholder="Enter Category" />
-      <p class="category-amount">
+    <div className="category-bubble">
+      <input className="category-name" placeholder="Enter Category" />
+      <p className="category-amount">
         ${(props.currMoney * props.percent * 0.01).toFixed(2)}
       </p>
-      <div class="vl" />
+      <div className="vl" />
       <div>
-        <div class="percent-bubble">
+        <div className="percent-bubble">
           <GetCategoryPercent
             updatePercent={props.updatePercent}
             index={props.index}

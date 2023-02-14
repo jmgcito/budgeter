@@ -1,21 +1,16 @@
 import React from "react";
 
-class GetPercent extends React.Component {
-  constructor(props) {
-    super(props);
-  }
-  render() {
-    return (
-      <input
-        type="number"
-        class="input-field percent"
-        min={0}
-        max={100}
-        value={this.props.percent}
-        onChange={this.props.changePercent}
-      />
-    );
-  }
-}
+const GetPercent = (props) => {
+  return (
+    <input
+      type="number"
+      className="input-field percent"
+      min={0}
+      max={100}
+      value={props.percent}
+      onChange={props.changePercent}
+    />
+  );
+};
 
 export default GetPercent;

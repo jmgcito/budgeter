@@ -6,12 +6,12 @@ import BodySection from "./BodySection";
 function Header(props) {
   return (
     <div>
-      <p class="margin-right">
-        <strong>Monthly Income</strong>
+      <p className="margin-right">
+        <strong>Budget Amount</strong>
         <br />$
         <GetMoney currMoney={props.currMoney} changeMoney={props.changeMoney} />
       </p>
-      <p class="header-container">
+      <p className="header-container">
         <strong>Expenses </strong>
         <GetPercent
           percent={props.exPercent}
@@ -31,8 +31,8 @@ function Header(props) {
 
 function Budgeter(props) {
   return (
-    <div class="body-container">
-      <div class="header card">
+    <div className="body-container">
+      <div className="header card">
         <Header
           currMoney={props.currMoney}
           changeMoney={props.changeMoney}

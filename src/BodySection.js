@@ -48,18 +48,18 @@ class BodySection extends React.Component {
     const eventPercent = event.target.value;
     let nextPercent = 0;
 
-    if (index + 1 == percents.length) {
+    if (index + 1 === percents.length) {
       nextPercent = percents[0];
     } else {
       nextPercent = percents[index + 1];
     }
 
     if (eventPercent >= 0 && eventPercent <= 100) {
-      if (nextPercent != 0) {
+      if (nextPercent !== 0) {
         nextPercent = nextPercent - (eventPercent - previousValue);
         percents[index] = eventPercent;
 
-        if (index + 1 == percents.length) {
+        if (index + 1 === percents.length) {
           percents[0] = nextPercent;
         } else {
           percents[index + 1] = nextPercent;
@@ -79,17 +79,17 @@ class BodySection extends React.Component {
         percent={percent}
         removeCategory={this.removeCategory}
         categories={this.state.categories}
+        key={index}
         index={index}
         updatePercent={this.updatePercent}
       />
     ));
     return (
-      <section class="body-container move-up">
-        <p>
-          <h2>{this.props.title}</h2>${this.props.currMoney}
-        </p>
+      <section className="body-container move-up">
+        <h2>{this.props.title}</h2>
+        <p>${this.props.currMoney}</p>
         {categoriesArray}
-        <div class="add-remove">
+        <div className="add-remove">
           <button onClick={this.addCategory}>+</button>
           <button onClick={this.removeCategory}>-</button>
         </div>

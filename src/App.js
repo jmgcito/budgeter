@@ -34,9 +34,7 @@ class App extends React.Component {
   render() {
     return (
       <div>
-        <h1 class="margin-right title">Monthly Budgeter</h1>
-
-        <article class="main">
+        <article className="main">
           <Budgeter
             currMoney={this.state.currMoney}
             exPercent={this.state.exPercent}
