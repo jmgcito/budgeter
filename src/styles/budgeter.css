@@ -1,4 +1,4 @@
-hr {
+/* hr {
   border: 0;
   width: 96%;
   border-radius: 2px;
@@ -121,14 +121,14 @@ body {
 .main {
   height: 1000px;
   background-color: rgb(201, 236, 246);
-}
+} */
 /* .add-remove {
   position: relative;
   left: 110px;
   bottom: 5px;
 } */
 
-@media (min-width: 640px) {
+/* @media (min-width: 640px) {
   .category-bubble {
     width: 1000px;
   }
@@ -153,10 +153,10 @@ body {
     margin-right: 100px;
     padding-right: 30px;
   }
-  /* .add-remove {
+  .add-remove {
     position: relative;
     left: 480px;
     bottom: 5px;
     transform: scale(125%);
-  } */
-}
+  }
+} */

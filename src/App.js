@@ -1,52 +1,76 @@
-import React from "react";
-import "./budgeter.css";
-import Budgeter from "./Budgeter";
+import { useState } from "react";
 
-class App extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      currMoney: 600,
-      exPercent: 70,
-      savPercent: 30,
-    };
-    this.changeMoney = this.changeMoney.bind(this);
-    this.changeExPercent = this.changeExPercent.bind(this);
-    this.changeSavPercent = this.changeSavPercent.bind(this);
-  }
-  changeMoney(event) {
-    this.setState({
-      currMoney: event.target.value,
-    });
-  }
-  changeExPercent(event) {
-    this.setState({
-      exPercent: event.target.value,
-      savPercent: 100 - event.target.value,
-    });
-  }
-  changeSavPercent(event) {
-    this.setState({
-      exPercent: 100 - event.target.value,
-      savPercent: event.target.value,
-    });
-  }
-  render() {
-    return (
-      <div>
-        <article className="main">
-          <Budgeter
-            currMoney={this.state.currMoney}
-            exPercent={this.state.exPercent}
-            savPercent={this.state.savPercent}
-            changeMoney={this.changeMoney}
-            changeExPercent={this.changeExPercent}
-            changeSavPercent={this.changeSavPercent}
-          />
-        </article>
-      </div>
-    );
-  }
-}
+import "./styles/budgeter.css";
+
+import Header from "./components/Header";
+import BudgetSection from "./components/BudgetSection";
+
+const App = ({ savedData }) => {
+  const {
+    savedCategories,
+    savedBudget,
+    savedExpensePercent,
+    savedSavingsPercent,
+  } = savedData;
+  const [totalBudget, setBudget] = useState(savedBudget);
+  const [expensePercent, setExpensePercent] = useState(savedExpensePercent);
+  const [savingsPercent, setSavingsPercent] = useState(savedSavingsPercent);
+
+  const changeBudget = (event) => {
+    setBudget(event.target.value);
+  };
+
+  const changeExpensePercent = (event) => {
+    setExpensePercent(event.target.value);
+    setSavingsPercent(100 - event.target.value);
+  };
+
+  const changeSavingsPercent = (event) => {
+    setExpensePercent(100 - event.target.value);
+    setSavingsPercent(event.target.value);
+  };
+
+  return (
+    <div>
+      <Header
+        currMoney={totalBudget}
+        changeMoney={changeBudget}
+        exPercent={expensePercent}
+        savPercent={savingsPercent}
+        changeExPercent={changeExpensePercent}
+        changeSavPercent={changeSavingsPercent}
+      />
+
+      {expensePercent < 1 ? (
+        <div>No Expenses</div>
+      ) : (
+        <BudgetSection
+          title={"Expenses"}
+          budgetAmount={(totalBudget * expensePercent * 0.01).toFixed(2)}
+          percent={expensePercent}
+          savedCategories={savedCategories}
+        />
+      )}
+
+      <hr />
+
+      {savingsPercent < 1 ? (
+        <div>No Savings</div>
+      ) : (
+        <BudgetSection
+          title={"Savings"}
+          budgetAmount={(totalBudget * savingsPercent * 0.01).toFixed(2)}
+          percent={savingsPercent}
+        />
+      )}
+
+      <footer>
+        <a href="https://joshuaguillen.com/" className="credit">
+          joshua m guillen
+        </a>
+      </footer>
+    </div>
+  );
+};
 
 export default App;
